@@ -1,5 +1,6 @@
 Star [] s = new Star [100];
 Spaceship ship = new Spaceship();
+ArrayList <Asteroids> ash = new ArrayList<Asteroids>();
 boolean PW = false;
 boolean PS = false;
 boolean PA = false;
@@ -10,12 +11,23 @@ public void setup() {
   for (int i = 0; i < s.length; i++) {
     s[i] = new Star();
   }
-  //ship = new Spaceship();
+  for(int i = 0;i<100;i++){
+   ash.add(new Asteroids());
+  }
 }
 public void draw() {
   background(0);
   for (int i = 0; i<s.length; i++) {
     s[i].show();
+  }
+  for(int i = 0;i<ash.size();i++){
+     ash.get(i).show(); 
+     ash.get(i).move();
+     float d= dist((float)(ship.getX()), (float)(ship.getY()), (float)(ash.get(i).getX()), (float)(ash.get(i).getY()));
+  if(d < 12){
+    ash.remove(i);
+    ash.add(new Asteroids());
+    }
   }
   ship.show();
   ship.move();
